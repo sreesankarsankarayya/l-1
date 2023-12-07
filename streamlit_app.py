@@ -1,15 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template
+import streamlit as st
 
 app = Flask(__name__)
-
-# Defining the home page of our site
-@app.route("/")  # this sets the route to this page
-def home():
-	return "Hello! this is the main page <h1>HELLO</h1>"  # some basic inline html
-
-@app.route("/<name>")
-def user(name):
-    return f"Hello {name}!"
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+@app.route('/')
+def index():
+    return render_template('index.html')
+@app.route('/streamlit')
+def streamlit():
+    st.set_page_config(page_title="My Streamlit App")
+    st.write("Hello, world!")
+if __name__ == '__main__':
+    app.run()
